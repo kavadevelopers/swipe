@@ -1,0 +1,1 @@
+[27-Jul-2020 13:00:19 UTC] PHP Fatal error:  Interface 'Tymon\JWTAuth\Contracts\JWTSubject' not found in /home/f21wligl16f1/public_html/projects/swipe/app/User.php on line 10

@@ -1,0 +1,3 @@
+<div>
+    {{ $mailData['message'] }}
+</div>
