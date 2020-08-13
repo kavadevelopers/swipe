@@ -759,7 +759,7 @@ class UserController extends Controller
         );
 
         $carmodel = Carmodel::where('id',$request->model_id)->first();
-        $vehicalType  = App\VehicalType::find($carmodel->vehicletype_id);
+        $vehicalType  = \App\VehicalType::find($carmodel->vehicletype_id);
         $dataArr["partner_price"]    = $vehicalType->partner_price;
         $dataArr["user_price"]    = $vehicalType->user_price;
 
