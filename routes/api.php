@@ -37,7 +37,7 @@ Route::get('rewards'         , 'RewardController@rewardlists');
 
 
 Route::group(['middleware' => ['jwt.auth:api']], function() {    
-	Route::get('vehicle_color', 'VehicleColorController@index');
+	Route::get('vehicle_color', 'ApiVehicleColor@get_colors');
 	Route::get('vehicle_type', 'VehicleColorController@type');
 	Route::get('profile_info', 'UserController@profileinfo');
 	Route::post('update_info', 'UserController@editprofileinfo');
