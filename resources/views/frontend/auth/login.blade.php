@@ -16,6 +16,15 @@
                         </ul>
                     </div>
                 @endif
+                @if( Session::has( 'success' ))
+                    <div class="alert alert-success">
+                        {{ Session::get( 'success' ) }}
+                    </div>
+                @elseif( Session::has( 'warning' ))
+                     <div class="alert alert-warning">
+                        {{ Session::get( 'warning' ) }}
+                    </div>
+                @endif
                 <div class="panel-heading text-center text-bold">{{ trans('SIGN IN')}}</div>
 
                 <div class="panel-body">

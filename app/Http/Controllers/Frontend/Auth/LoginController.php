@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Redirect;
 use Validator;
+use Session;
 use App\Models\Access\User\User; 
 /**
  * Class LoginController.
