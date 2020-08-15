@@ -181,7 +181,7 @@ class PartnersController extends Controller
                 ];
                 logistics::create($logistics);
                 $updatePartner = $partner->update(['verification_status' => $status, 'admin_id' => $admin->id, 'activation_code'=> uniqid()]);
-                DB::table('users')->where('id',$input['id'])->update(['verification_status','1']);
+               // DB::table('users')->where('id',$input['id'])->update(['verification_status','1']);
 
             } catch (\Throwable $th) {
                 
