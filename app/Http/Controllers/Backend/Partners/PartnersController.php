@@ -21,6 +21,7 @@ use Mail;
 use Stripe;
 use App\JoinFee;
 use App\logistics;
+use DB;
 use Illuminate\Support\Facades\DB;
 
 
@@ -181,6 +182,8 @@ class PartnersController extends Controller
                 ];
                 logistics::create($logistics);
                 $updatePartner = $partner->update(['verification_status' => $status, 'admin_id' => $admin->id, 'activation_code'=> uniqid()]);
+                DB::table('user')->where('id',$input['id'])->update(['verification_status','1']);
+
             } catch (\Throwable $th) {
                 
                return response()->json(["code" => 400, "message" => $th], 400);
