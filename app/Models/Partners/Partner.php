@@ -56,8 +56,7 @@ class Partner extends Model
      * @var array
      */
     protected $guarded = [
-        'id',
-        'activation_code'
+        'id'
     ];
 
     /**

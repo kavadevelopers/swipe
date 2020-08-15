@@ -180,7 +180,7 @@ class PartnersController extends Controller
                     'type' => 'on_bording',
                 ];
                 logistics::create($logistics);
-                $updatePartner = $partner->update(['verification_status' => $status, 'admin_id' => $admin->id, 'activation_code'=> uniqid()]);
+                $updatePartner = $partner->update(['verification_status' => $status, 'admin_id' => $admin->id, 'activation_code'=> $admin->id.'_'.uniqid()]);
                // DB::table('users')->where('id',$input['id'])->update(['verification_status','1']);
 
             } catch (\Throwable $th) {
