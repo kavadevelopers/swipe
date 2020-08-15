@@ -126,7 +126,7 @@ class CarWashBookingController extends Controller
                 $mybooking->model_desc = $vehicle->model_desc;
                 $mybooking->color_code = $vehicle->color_code;
                 $mybooking->color_name = $vehicle->color_name;
-                $mybooking->type = $vehicle->type;
+                $mybooking->type = $request->car_type;
                 $mybooking->partner_price        = $vehicle->partner_price;    
                 $mybooking->user_price        = $vehicle->user_price;    
             }
