@@ -114,7 +114,7 @@ class CarWashBookingController extends Controller
                 $mybooking->card_type        = $card->card_type;
             }
             $mybooking->user_name = $request->user()->name;
-            $vehicle = MyCar::join('carmodels', 'carmodels.id', '=', 'my_cars.car_model')->join('brands', 'brands.id', '=', 'my_cars.car_brand')->where('my_cars.id', $request->vehicle_id)->first();
+            $vehicle = MyCar::join('carmodels', 'carmodels.id', '=', 'my_cars.car_model')->join('brands', 'brands.id', '=', 'my_cars.car_brand')->join('vehical_types', 'vehical_types.id', '=', 'carmodels.vehicletype_id')->where('my_cars.id', $request->vehicle_id)->first();
             if(!is_null($vehicle)){
                 $mybooking->model_name = $vehicle->model_name;
                 $mybooking->brand_name = $vehicle->brand_name;
@@ -126,7 +126,7 @@ class CarWashBookingController extends Controller
                 $mybooking->model_desc = $vehicle->model_desc;
                 $mybooking->color_code = $vehicle->color_code;
                 $mybooking->color_name = $vehicle->color_name;
-                $mybooking->type = $request->car_type;
+                $mybooking->type = $vehicle->vehical_name;
                 $mybooking->partner_price        = $vehicle->partner_price;    
                 $mybooking->user_price        = $vehicle->user_price;    
             }
