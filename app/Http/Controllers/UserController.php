@@ -1000,8 +1000,6 @@ class UserController extends Controller
                 $profile->user_id = $user_id;
                 $profile->dob = $request->dob;
                 $profile->save();
-
-
             }
 
 

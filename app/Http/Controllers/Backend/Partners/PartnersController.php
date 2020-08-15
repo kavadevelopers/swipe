@@ -183,10 +183,10 @@ class PartnersController extends Controller
                 $updatePartner = $partner->update(['status' => $status, 'admin_id' => $admin->id, 'activation_code'=> uniqid()]);
             } catch (\Throwable $th) {
                 
-               return response()->json(["code" => 400, "message" => 'fail'], 400);
+               return response()->json(["code" => 400, "message" => $th], 400);
             }
         }else{
-            $status = 2;
+            $status = 0;
             $updatePartner = Partner::where('id',$input['id'])->update(['status' => $status, 'user_type' => "user"]);
         }
 

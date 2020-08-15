@@ -103,8 +103,12 @@
                     "id": id,
                     "status": status,
                 },
+                beforeSend : function(){
+                    $('.full-loader').show();
+                },
                 success: function(response) {
                     dataTable1.draw();
+                    $('.full-loader').hide();
                 },
                 error: function(error) {
                     // fgcode.val("Please select first FGcode");
@@ -113,15 +117,5 @@
         });
 
         });
-            
-        $(function() {
-           
-            
-
-            
-
-        });
-        
-        
     </script>
 @endsection
