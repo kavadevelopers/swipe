@@ -21,7 +21,6 @@ use Mail;
 use Stripe;
 use App\JoinFee;
 use App\logistics;
-use DB;
 use Illuminate\Support\Facades\DB;
 
 
