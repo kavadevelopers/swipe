@@ -45,7 +45,7 @@
                     </ul>
                 </li> /.messages-menu -->
 
-<!--                <li class="dropdown notifications-menu">
+               <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
                         <span class="label label-info notification-counter"></span>
@@ -53,7 +53,7 @@
 
                     <ul class="dropdown-menu notification-menu-container">
                     </ul>
-                </li> /.notifications-menu -->
+                </li>
 
 <!--                <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

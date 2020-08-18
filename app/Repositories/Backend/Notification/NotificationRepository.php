@@ -129,15 +129,15 @@ class NotificationRepository extends BaseRepository
     {
         $query = $this->model;
         if ($limit != 'all') {
-            $query->where('is_read', '=', 0);
-            $query = $query->orderBy('is_read', 'asc');
+            $query->where('flag', '=', "unread");
+            $query = $query->orderBy('flag', 'asc');
             $query = $query->orderBy('created_at', 'desc');
             $query = $query->limit($limit);
         }
 
         $query->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc');
 
-        if ($query->update(['is_read' => 1])) {
+        if ($query->update(['flag' => "read"])) {
             return true;
         } else {
             return false;
