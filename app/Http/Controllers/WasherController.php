@@ -687,7 +687,7 @@ class WasherController extends Controller
 
         $response->is_verify = false;
         
-        if($verification_code == $user->verification_code){
+        if($verification_code == $user->activation_code){
             $response->is_verify = true;
             User::where('id',$request->user()->id)->update(['user_type'=>'washer','verification_status' => 2,'activation_code'=> null]);
             $message = "Your account verify";
