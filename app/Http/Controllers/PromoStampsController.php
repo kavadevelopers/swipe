@@ -100,6 +100,29 @@ class PromoStampsController extends Controller
             $response->message = $message;
             return response()->json($response);
 
+        }else if(PromoStamps::where('user_id',$request->user()->id)->where('code',$request->promo)->where('isValid','valid')->first()){
+            $stamp = PromoStamps::where('user_id',$request->user()->id)->where('code',$request->promo)->where('isValid','valid')->first();
+
+            switch ($stamp->type) {
+                case 'Mini7':
+                    $discount = 7;
+                break;
+                case 'Mini3':
+                    $discount = 3;
+                break;
+                
+                default:
+                    $discount = 0;
+                    break;
+            }
+
+            $message = 'This code is valid';
+            $response->amount = $discount;
+            $response->type   = $stamp->type;
+            $response->status = 200;
+            $response->message = $message;
+            return response()->json($response);
+
         }else{
             $message = 'ooops! something went wrong please try again';
             $response->data = [];
@@ -107,43 +130,6 @@ class PromoStampsController extends Controller
             $response->message = $message;
             return response()->json($response); 
         }
-
-            // try {
-            //     $promoCode = $request->promo;
-
-            //     $stamp = PromoStamps::where('user_id',$request->user()->id)->where('code',$promoCode)->where('isValid','valid')->first();
-
-            //     if(!$stamp){
-            //         $message = 'The promocode is invalid or expired';
-            //         $response->message = $message;
-            //         $response->status = 401;
-            //         return response()->json($response);    
-            //     }
-            //     switch ($stamp->type) {
-            //         case 'Mini7':
-            //             $discount = 7;
-            //         break;
-            //         case 'Mini3':
-            //             $discount = 3;
-            //         break;
-                    
-            //         default:
-            //             $discount = 0;
-            //             break;
-            //     }
-            //     // $data['code'] = $stamp ? $stamp->code : '';
-            //     $message = 'This code is valid';
-            //     $response->type = $discount;
-            //     $response->status = 200;
-            //     $response->message = $message;
-            //     return response()->json($response);    
-            // } catch (\Throwable $th) {
-            //     $message = 'ooops! something went wrong please try again';
-            //     // $response->data = [];
-            //     $response->status = 400;
-            //     $response->message = $message;
-            //     return response()->json($response);    
-            // }
     }
 
     public function iredeemPromo(Request $request)
