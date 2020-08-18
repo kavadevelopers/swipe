@@ -90,7 +90,7 @@ class PromoStampsController extends Controller
     {
         $response = new StdClass;
         $response->status = 200;
-        $adminPromo = DB::table('promocodes')->where('promo_code',$request->promo)->where('status',1)->where('start_date >=',date('Y-m-d'))->where('end_date <=',date('Y-m-d'))->first();
+        $adminPromo = DB::table('promocodes')->where('promo_code',$request->promo)->where('status',1)->where('start_date','>=',date('Y-m-d'))->where('end_date','<=',date('Y-m-d'))->first();
 
 
 
