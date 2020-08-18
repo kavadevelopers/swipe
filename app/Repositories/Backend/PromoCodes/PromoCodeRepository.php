@@ -34,6 +34,7 @@ class PromoCodeRepository extends BaseRepository
                 config('module.promocodes.table').'.status',
                 config('module.promocodes.table').'.promo_code',
                 config('module.promocodes.table').'.count_limit',
+                config('module.promocodes.table').'.counter_usage',
                 config('module.promocodes.table').'.start_date',
                 config('module.promocodes.table').'.end_date',
                 config('module.promocodes.table').'.created_at',
