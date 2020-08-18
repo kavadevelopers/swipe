@@ -47,7 +47,7 @@ class PromoCodesTableController extends Controller
                 return $creator->fullname();
             })
             ->addColumn('count_limit', function ($promocode) {
-                return "0/$promocode->count_limit";
+                return "$promocode->counter_usage/$promocode->count_limit";
             })
             ->addColumn('time_limit', function ($promocode) {
                 return Carbon::parse($promocode->start_date)->toDateString()." - ".Carbon::parse($promocode->end_date)->toDateString();
