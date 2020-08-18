@@ -126,7 +126,7 @@ class PromoStampsController extends Controller
             return response()->json($response);
 
         }else{
-            $message = 'ooops! something went wrong please try again';
+            $message = 'This Promocode Is Invalid.';
             $response->data = [];
             $response->status = 400;
             $response->message = $message;
