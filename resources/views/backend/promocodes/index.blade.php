@@ -16,11 +16,7 @@
             @endauth
 
             <div class="box-tools pull-right">
-                <!-- <label class="control control--checkbox">
-                    <input type="checkbox" id="disableAll" class="promo-status" data-promo-id="all" /> <label for="disableAll">Disable All</label>
-                    <div class="control__indicator"></div>
-                </label>
-                @include('backend.promocodes.partials.promocodes-header-buttons') -->
+                
             </div>
         </div><!--box-header with-border-->
 
