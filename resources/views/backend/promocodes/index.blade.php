@@ -87,7 +87,7 @@
                         sortable: false,
                         render: (data, type, row, meta) => {
                             let str = "";
-                            str += `<input type="checkbox" data-toggle="toggle" class="promo-status" data-promo-id=${data.id} ${(data.status) ? "checked" : ""}  data-on="1" data-off="0" />`;
+                            str += `<input type="checkbox" data-toggle="toggle" class="promo-status" data-promo-id=${data.id} ${(data.status == 1) ? "checked" : ""}  data-on="1" data-off="0" />`;
                             
                             return str;
                         }
