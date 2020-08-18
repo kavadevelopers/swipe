@@ -76,7 +76,7 @@
                         data: 'status',
                         name: '{{config('module.promocodes.table')}}.status',
                         render: (status) => {
-                            return (status) ? "Live" : "Expired";
+                            return (status == 1) ? "Live" : "Expired";
                         }
                     },
                     {data: 'createdBy', name: '{{config('module.promocodes.table')}}.createdBy'},
@@ -134,8 +134,12 @@
                     "id": id,
                     "status": status,
                 },
+                beforeSend : function(){
+                    $('.full-loader').show();
+                },
                 success: function(response) {
                     dataTable.draw();
+                    $('.full-loader').hide();
                 },
                 error: function(error) {
                     // fgcode.val("Please select first FGcode");
