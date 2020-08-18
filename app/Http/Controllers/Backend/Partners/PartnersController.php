@@ -209,6 +209,6 @@ class PartnersController extends Controller
             'partner' => $partner,
             'joinFee' => $joinFee,
             'paymentIntent' => $paymentIntent['client_secret']
-        ]);;
+        ]);
     }
 }
