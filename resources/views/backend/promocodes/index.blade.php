@@ -32,7 +32,7 @@
                             <th>{{ trans('labels.backend.promocodes.table.time_limit') }}</th>
                             <th>{{ trans('labels.backend.promocodes.table.status') }}</th>
                             <th>{{ trans('labels.backend.promocodes.table.createdBy') }}</th>
-                            <th>{{ trans('labels.general.actions') }}</th>
+                            <th>Active</th>
                         </tr>
                     </thead>
                    
