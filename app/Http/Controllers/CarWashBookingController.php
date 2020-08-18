@@ -14,6 +14,7 @@ use StdClass;
 use Stripe;
 use Validator;
 use Carbon\Carbon;
+use DB;
 
 class CarWashBookingController extends Controller
 {
@@ -132,19 +133,39 @@ class CarWashBookingController extends Controller
             }
                 // $profile = Profile::where('user_id',$user_id)->first();
                 // dd($profile);\
-            if(!is_null($request->promo)){
-                $promoCode = $request->promo;
-                $stamp = PromoStamps::where('user_id',$request->user()->id)->where('code',$promoCode)->where('isValid','valid')->first();
-                if(!$stamp){
-                    $mybooking->isPromo        = false;  
-                }else{
-                    $stamp->isValid = 'used';
-                    $mybooking->booking_promp        = $request->promo;  
-                    $mybooking->isPromo        = true;
-                    $stamp->save();
-                }
+            // if(!is_null($request->promo)){
+            //     $promoCode = $request->promo;
+            //     $stamp = PromoStamps::where('user_id',$request->user()->id)->where('code',$promoCode)->where('isValid','valid')->first();
+            //     if(!$stamp){
+            //         $mybooking->isPromo        = false;  
+            //     }else{
+            //         $stamp->isValid = 'used';
+            //         $mybooking->booking_promp        = $request->promo;  
+            //         $mybooking->isPromo        = true;
+            //         $stamp->save();
+            //     }
                 
+            // }
+
+            if($request->promo_type != ""){
+                $mybooking->booking_promp        = $request->promo;  
+                $mybooking->isPromo        = true;
+                if($request->promo_type == "admin"){
+                    $adminPromo = DB::table('promocodes')->where('id',$request->promo_id)->first();
+                    if($adminPromo){
+                        DB::table('promocodes')->where('id',$request->promo_id)->update(['counter_usage' => ($request->counter_usage + 1)]);
+                    }
+                }else{
+                    $stamp = PromoStamps::where('id',$request->promo_id)->first();
+                    if($stamp){
+                        $stamp->isValid = 'used';
+                        $stamp->save();
+                    }
+                }
+            }else{
+                $mybooking->isPromo        = false;  
             }
+
             $mybooking->save();
             if ($mybooking){
                 // is_booked
