@@ -11387,38 +11387,7 @@ return d.keepInvalid=a,l},l.datepickerInput=function(a){if(0===arguments.length)
 		input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
 	});
 }( document, window, 0 ));
-$(document).ready(function () {
 
-    $(".notifications-menu").on("hide.bs.dropdown", function(event){
-
-        $.ajax({
-            type: 'GET',
-            url: '/admin/notification/clearcurrentnotifications',
-            dataType: "JSON",
-            success: function(data){
-                getNotifications();
-            }
-        });
-
-    });
-
-    getNotifications();
-    setInterval(function () {
-        getNotifications();
-    }, 60000);
-});
-
-function getNotifications() {
-    $.ajax({
-        type: "GET",
-        url: '/admin/notification/getlist',
-        dataType: "JSON",
-        success: function (result) {
-            $(".notification-counter").text(result.count);
-            $(".notification-menu-container").html(result.view);
-        }
-    });
-}
 
 //common functionalities for all the javascript featueres
 var Backend = {}; // common variable used in all the files of the backend

@@ -142,5 +142,41 @@
         {{ Html::script(('js/backend/jquery.PrintArea.js'))}}
         <!-- {{ Html::script(('js/backend/jquery.min.js'))}} -->
         @yield('after-scripts')
+
+        <script type="text/javascript">
+          $(document).ready(function () {
+
+              $(".notifications-menu").on("hide.bs.dropdown", function(event){
+
+                  $.ajax({
+                      type: 'GET',
+                      url: '{{ route("admin.notification.clearcurrentnotifications") }}',
+                      dataType: "JSON",
+                      success: function(data){
+                          getNotifications();
+                      }
+                  });
+
+              });
+
+              getNotifications();
+              setInterval(function () {
+                  getNotifications();
+              }, 60000);
+          });
+
+          function getNotifications() {
+              $.ajax({
+                  type: "GET",
+                  url: '{{ route("admin.notification.getlist") }}',
+                  dataType: "JSON",
+                  success: function (result) {
+                      $(".notification-counter").text(result.count);
+                      $(".notification-menu-container").html(result.view);
+                  }
+              });
+          }
+        </script>
+
     </body>
 </html>
