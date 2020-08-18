@@ -15,13 +15,13 @@
                 </a>
             @endauth
 
-            <!-- <div class="box-tools pull-right">
-                <label class="control control--checkbox">
+            <div class="box-tools pull-right">
+                <!-- <label class="control control--checkbox">
                     <input type="checkbox" id="disableAll" class="promo-status" data-promo-id="all" /> <label for="disableAll">Disable All</label>
                     <div class="control__indicator"></div>
                 </label>
-                @include('backend.promocodes.partials.promocodes-header-buttons')
-            </div> -->
+                @include('backend.promocodes.partials.promocodes-header-buttons') -->
+            </div>
         </div><!--box-header with-border-->
 
         <div class="box-body">
@@ -36,7 +36,7 @@
                             <th>{{ trans('labels.backend.promocodes.table.time_limit') }}</th>
                             <th>{{ trans('labels.backend.promocodes.table.status') }}</th>
                             <th>{{ trans('labels.backend.promocodes.table.createdBy') }}</th>
-                            <th>Active ?</th>
+                            <th>{{ trans('labels.general.actions') }}</th>
                         </tr>
                     </thead>
                    
