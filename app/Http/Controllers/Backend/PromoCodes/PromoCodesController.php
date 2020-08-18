@@ -124,7 +124,7 @@ class PromoCodesController extends Controller
 
         try {
             $promoId = $request->id;
-            $status = json_decode($request->status);
+            $status = $request->status;
 
             $promoCode = PromoCode::select('*');
 
@@ -132,11 +132,11 @@ class PromoCodesController extends Controller
                 $promoCode = $promoCode->where('id', $promoId);
             }
 
-            if($promoId == "all" && $status){
-                $status = false;
-            }else{
-                $status = true;
-            }
+            // if($promoId == "all" && $status){
+            //     $status = 1;
+            // }else{
+            //     $status = 0;
+            // }
             $isUpdated = $promoCode->update(['status' => $status]);
 
             if ($isUpdated) {

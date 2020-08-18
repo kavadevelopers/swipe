@@ -15,13 +15,13 @@
                 </a>
             @endauth
 
-            <div class="box-tools pull-right">
+            <!-- <div class="box-tools pull-right">
                 <label class="control control--checkbox">
                     <input type="checkbox" id="disableAll" class="promo-status" data-promo-id="all" /> <label for="disableAll">Disable All</label>
                     <div class="control__indicator"></div>
                 </label>
                 @include('backend.promocodes.partials.promocodes-header-buttons')
-            </div>
+            </div> -->
         </div><!--box-header with-border-->
 
         <div class="box-body">
@@ -36,7 +36,7 @@
                             <th>{{ trans('labels.backend.promocodes.table.time_limit') }}</th>
                             <th>{{ trans('labels.backend.promocodes.table.status') }}</th>
                             <th>{{ trans('labels.backend.promocodes.table.createdBy') }}</th>
-                            <th>{{ trans('labels.general.actions') }}</th>
+                            <th>Active ?</th>
                         </tr>
                     </thead>
                    
@@ -91,7 +91,7 @@
                         sortable: false,
                         render: (data, type, row, meta) => {
                             let str = "";
-                            str += `<input type="checkbox" data-toggle="toggle" class="promo-status" data-promo-id=${data.id} ${(data.status) ? "checked" : ""}  data-on="Active" data-off="Disable" />`;
+                            str += `<input type="checkbox" data-toggle="toggle" class="promo-status" data-promo-id=${data.id} ${(data.status) ? "checked" : ""}  data-on="1" data-off="0" />`;
                             
                             return str;
                         }
@@ -125,8 +125,12 @@
 
         $(document).on("change", ".promo-status", function(e) {
             let id = $(this).data('promo-id');
-            let status = $(this).prop("checked");
-            
+            let status = 1;
+            if($(this).prop("checked")){
+                status = 1;
+            }else{
+                status = 0;
+            }
             $.ajax({
                 url: "{{ url('admin/promocodes/status') }}",
                 type: "POST",
