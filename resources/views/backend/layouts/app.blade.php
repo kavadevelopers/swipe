@@ -148,14 +148,14 @@
 
               $(".notifications-menu").on("hide.bs.dropdown", function(event){
 
-                  // $.ajax({
-                  //     type: 'GET',
-                  //     url: '{{ route("admin.notification.clearcurrentnotifications") }}',
-                  //     dataType: "JSON",
-                  //     success: function(data){
-                  //         getNotifications();
-                  //     }
-                  // });
+                  $.ajax({
+                      type: 'GET',
+                      url: '{{ url("admin/notification/clearcurrentnotifications") }}',
+                      dataType: "JSON",
+                      success: function(data){
+                          getNotifications();
+                      }
+                  });
 
               });
 
@@ -168,7 +168,7 @@
           function getNotifications() {
               $.ajax({
                   type: "GET",
-                  url: '{{ route("admin.notification.getlist") }}',
+                  url: '{{ url("admin/notification/getlist") }}',
                   dataType: "JSON",
                   success: function (result) {
                       $(".notification-counter").text(result.count);
