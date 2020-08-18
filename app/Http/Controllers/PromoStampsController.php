@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use StdClass;
+use DB;
 
 class PromoStampsController extends Controller
 {
