@@ -96,6 +96,7 @@ class PromoStampsController extends Controller
             $message = 'This code is valid';
             $response->amount = $adminPromo->amount;
             $response->type   = "admin";
+            $response->promo_id   = $adminPromo->id;
             $response->status = 200;
             $response->message = $message;
             return response()->json($response);
@@ -117,8 +118,9 @@ class PromoStampsController extends Controller
             }
 
             $message = 'This code is valid';
-            $response->amount = $discount;
-            $response->type   = $stamp->type;
+            $response->amount       = $discount;
+            $response->type         = $stamp->type;
+            $response->promo_id     = $stamp->id;
             $response->status = 200;
             $response->message = $message;
             return response()->json($response);
