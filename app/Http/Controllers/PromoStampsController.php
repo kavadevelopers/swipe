@@ -89,41 +89,63 @@ class PromoStampsController extends Controller
     {
         $response = new StdClass;
         $response->status = 200;
-        try {
-            $promoCode = $request->promo;
-            $stamp = PromoStamps::where('user_id',$request->user()->id)->where('code',$promoCode)->where('isValid','valid')->first();
+        $adminPromo = DB::table('promocodes')->where('promo_code',$request->promo)->where('status',1)->where('start_date >=',date('Y-m-d'))->where('end_date <=',date('Y-m-d'))->first();
 
-            if(!$stamp){
-                $message = 'The promocode is invalid or expired';
-                $response->message = $message;
-                $response->status = 401;
-                return response()->json($response);    
-            }
-            switch ($stamp->type) {
-                case 'Mini7':
-                    $discount = 7;
-                break;
-                case 'Mini3':
-                    $discount = 3;
-                break;
-                
-                default:
-                    $discount = 0;
-                    break;
-            }
-            // $data['code'] = $stamp ? $stamp->code : '';
+
+
+        if($adminPromo && $adminPromo->counter_usage < $adminPromo->count_limit){
+
             $message = 'This code is valid';
-            $response->type = $discount;
+            $response->amount = $adminPromo->amount;
+            $response->type   = "admin";
             $response->status = 200;
             $response->message = $message;
-            return response()->json($response);    
-        } catch (\Throwable $th) {
+            return response()->json($response);
+
+        }else{
             $message = 'ooops! something went wrong please try again';
-            // $response->data = [];
+            $response->data = [];
             $response->status = 400;
             $response->message = $message;
-            return response()->json($response);    
+            return response()->json($response); 
         }
+
+            // try {
+            //     $promoCode = $request->promo;
+
+            //     $stamp = PromoStamps::where('user_id',$request->user()->id)->where('code',$promoCode)->where('isValid','valid')->first();
+
+            //     if(!$stamp){
+            //         $message = 'The promocode is invalid or expired';
+            //         $response->message = $message;
+            //         $response->status = 401;
+            //         return response()->json($response);    
+            //     }
+            //     switch ($stamp->type) {
+            //         case 'Mini7':
+            //             $discount = 7;
+            //         break;
+            //         case 'Mini3':
+            //             $discount = 3;
+            //         break;
+                    
+            //         default:
+            //             $discount = 0;
+            //             break;
+            //     }
+            //     // $data['code'] = $stamp ? $stamp->code : '';
+            //     $message = 'This code is valid';
+            //     $response->type = $discount;
+            //     $response->status = 200;
+            //     $response->message = $message;
+            //     return response()->json($response);    
+            // } catch (\Throwable $th) {
+            //     $message = 'ooops! something went wrong please try again';
+            //     // $response->data = [];
+            //     $response->status = 400;
+            //     $response->message = $message;
+            //     return response()->json($response);    
+            // }
     }
 
     public function iredeemPromo(Request $request)
