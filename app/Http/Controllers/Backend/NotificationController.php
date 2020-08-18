@@ -33,7 +33,7 @@ class NotificationController extends Controller
         /*
          * where conditions to get count
          */
-        $where = ['user_id' => $userId, 'is_read' => 0];
+        $where = ['user_id' => $userId, 'flag' => "unread"];
         /*
          * get unread count
          */
@@ -41,7 +41,7 @@ class NotificationController extends Controller
         /*
          * where condition to list top notifications
          */
-        $listWhere = ['user_id' => $userId, 'is_read' => 0];
+        $listWhere = ['user_id' => $userId, 'flag' => "unread"];
         /*
          * get top 5 notifications
          */

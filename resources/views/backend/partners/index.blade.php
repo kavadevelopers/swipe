@@ -54,7 +54,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            console.log("data");
+            //console.log("data");
             dataTable1 = $('#partners-table').DataTable({
                 processing: true,
                 serverSide: true,
