@@ -174,7 +174,7 @@ class PartnersController extends Controller
                     'type' => 'on_bording',
                 ];
                 logistics::create($logistics);
-                $updatePartner = $partner->update(['verification_status' => $status, 'admin_id' => $admin->id, 'activation_code'=> $input['id'].'_'.microtime()]);
+                $updatePartner = $partner->update(['verification_status' => $status, 'admin_id' => $admin->id, 'activation_code'=> $input['id'].mt_rand(100000,999999)]);
                // DB::table('users')->where('id',$input['id'])->update(['verification_status','1']);
 
             } catch (\Throwable $th) {
@@ -193,7 +193,7 @@ class PartnersController extends Controller
             ->subject("Partener Approved");
         $message->from("swipeadm2020@gmail.com","Approve Partner");
         });
-        
+
         return response()->json(["code" => 200, "message" => 'success'], 200);
     }
 
