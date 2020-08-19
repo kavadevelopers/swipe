@@ -214,9 +214,9 @@ class PartnersController extends Controller
         // ]);
 
         $partner = Partner::where('activation_code',$uid)->first();
-        if($user->verification_status == 1){
+        if($partner->verification_status == 1){
             $sstatus = 2;
-        }else if($user->verification_status == 3){
+        }else if($partner->verification_status == 3){
             $sstatus = 23;
         }else{
             $sstatus = 23;
