@@ -221,7 +221,7 @@ class PartnersController extends Controller
         }else{
             $sstatus = 23;
         }
-
+        $partner->update(['verification_status' => $sstatus]);
 
         echo "Payment Done";
     }
