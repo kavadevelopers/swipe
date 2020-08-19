@@ -310,7 +310,7 @@ class UserController extends Controller
             // dd($car_model_id);
             $brand = Brand::where('id',$car_brand_id)->first();
             $model = Carmodel::select('carmodels.*','carmodels.model_name' ,'vehical_types.partner_price','vehical_types.user_price')->where('carmodels.id',$car_model_id)->join('vehical_types', 'vehical_types.id', '=', 'carmodels.vehicletype_id')->first();
-            $user->dob="";
+            $user->dob=$userdata->dob;
             $user->gender="";
             $user->mobile = $userdata->mobile;
             $user->user_type = $userdata->user_type;
@@ -331,7 +331,7 @@ class UserController extends Controller
                     $userProfileData['PrimaryCar']->car_brand_name = $userProfileData['PrimaryCar']->car_brand_name;
                     $userProfileData['PrimaryCar']->car_model_name = $userProfileData['PrimaryCar']->car_model_name;
                 }
-                $user->dob = $userProfileData->dob;
+                
                 $user->gender = $userProfileData->gender;
                 $user->profile_pic = $userProfileData->profile_pic;
                 $user->profession = $userProfileData->profession;
