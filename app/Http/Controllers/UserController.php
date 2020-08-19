@@ -993,7 +993,7 @@ class UserController extends Controller
             $washer = new WasherDetails;
             $profile = Profile::where('user_id', $user_id)->first();
             if ($profile){
-                $profile->dob == $request->dob;
+                $profile->dob = date('Y-m-d',strtotime($request->dob));
                 $profile->update(); 
             }
             else{
