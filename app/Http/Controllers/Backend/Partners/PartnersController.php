@@ -145,13 +145,7 @@ class PartnersController extends Controller
         
         if($input['status'] == 'Approve'){
             $partner = Partner::where('id',$input['id'])->first();
-            $to_name = $partner->name;
-            $to_email = $partner->email;
-            Mail::send("vendor.notifications.paymentLink", ['partner' => $partner], function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)
-                ->subject("Partener Approved");
-            $message->from("swipeadm2020@gmail.com","Approve Partner");
-            });
+            
 
             $status = 1;
             try {
@@ -191,6 +185,15 @@ class PartnersController extends Controller
             $updatePartner = Partner::where('id',$input['id'])->update(['verification_status' => '4', 'user_type' => "user"]);
         }
 
+        $partner = Partner::where('id',$input['id'])->first();
+        $to_name = $partner->name;
+        $to_email = $partner->email;
+        Mail::send("vendor.notifications.paymentLink", ['partner' => $partner], function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+            ->subject("Partener Approved");
+        $message->from("swipeadm2020@gmail.com","Approve Partner");
+        });
+        
         return response()->json(["code" => 200, "message" => 'success'], 200);
     }
 

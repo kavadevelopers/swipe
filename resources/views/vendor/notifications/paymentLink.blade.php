@@ -1,5 +1,5 @@
 
 
-Your Activation Code is :- {{ $partner->activation_code }}
+Your Activation Code is :- {{ $partner->activation_code }} <br>
 
-{{ env('APP_URL')}}payment/on_board/{{$partner->activation_code }}
+<a href="{{ env('APP_URL')}}payment/on_board/{{$partner->activation_code }}">Make Payment</a>
