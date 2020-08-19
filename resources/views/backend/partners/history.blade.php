@@ -28,7 +28,7 @@
                             <th>Email Address</th>
                             <th>Citizenship</th>
                             <th>Date of Birth (DOB)</th>
-                            <th>Bank Details</th>
+                            <th>Transaction Id</th>
                         </tr>
                     </thead>
                 </table>
@@ -63,10 +63,17 @@
                     {data: 'name', name: '{{config('module.partners.table')}}.name'},
                     {data: 'mobile', name: '{{config('module.partners.table')}}.mobile'},
                     {data: 'email', name: '{{config('module.partners.table')}}.email'},
-                    {data: 'email', name: '{{config('module.partners.table')}}.email'},
-                    {data: 'email', name: '{{config('module.partners.table')}}.email'},
-                    {data: 'email', name: '{{config('module.partners.table')}}.email'},
-                    {data: 'actions', name: 'actions', searchable: false, sortable: false}
+                    {data: 'citizenship', name: '{{config('module.partners.table')}}.citizenship'},
+                    {data: 'dob', name: '{{config('module.partners.table')}}.dob'},
+                    {data: 'bank_detail', name: '{{config('module.partners.table')}}.email',
+                        render: function ( data, type, row, meta ) {
+                            if(row.bank_detail){
+                                return row.bank_detail.bank_name+"<br>"+row.bank_detail.account_number;
+                            }else{
+                                return "";
+                            }
+                        }
+                    }
                 ],
                 order: [[0, "asc"]],
                 searchDelay: 500,

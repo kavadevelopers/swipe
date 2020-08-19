@@ -180,7 +180,7 @@ class PartnersController extends Controller
                     'type' => 'on_bording',
                 ];
                 logistics::create($logistics);
-                $updatePartner = $partner->update(['verification_status' => $status, 'admin_id' => $admin->id, 'activation_code'=> uniqid()]);
+                $updatePartner = $partner->update(['verification_status' => $status, 'admin_id' => $admin->id, 'activation_code'=> $input['id'].'_'.microtime()]);
                // DB::table('users')->where('id',$input['id'])->update(['verification_status','1']);
 
             } catch (\Throwable $th) {
@@ -188,8 +188,7 @@ class PartnersController extends Controller
                return response()->json(["code" => 400, "message" => $th], 400);
             }
         }else{
-            $status = 0;
-            $updatePartner = Partner::where('id',$input['id'])->update(['status' => $status, 'user_type' => "user"]);
+            $updatePartner = Partner::where('id',$input['id'])->update(['verification_status' => '4', 'user_type' => "user"]);
         }
 
         return response()->json(["code" => 200, "message" => 'success'], 200);
@@ -202,13 +201,25 @@ class PartnersController extends Controller
 
     public function onboardPay($uid)
     {
+        // $partner = Partner::where('activation_code',$uid)->first();
+        // $joinFee = JoinFee::where('user_id',$partner->id)->first();
+        // $paymentIntent = Stripe::paymentIntents()->find($joinFee->payment_intent);
+        // return view('frontend.onboard_payment')->with([
+        //     'partner' => $partner,
+        //     'joinFee' => $joinFee,
+        //     'paymentIntent' => $paymentIntent['client_secret']
+        // ]);
+
         $partner = Partner::where('activation_code',$uid)->first();
-        $joinFee = JoinFee::where('user_id',$partner->id)->first();
-        $paymentIntent = Stripe::paymentIntents()->find($joinFee->payment_intent);
-        return view('frontend.onboard_payment')->with([
-            'partner' => $partner,
-            'joinFee' => $joinFee,
-            'paymentIntent' => $paymentIntent['client_secret']
-        ]);
+        if($user->verification_status == 1){
+            $sstatus = 2;
+        }else if($user->verification_status == 3){
+            $sstatus = 23;
+        }else{
+            $sstatus = 23;
+        }
+
+
+        echo "Payment Done";
     }
 }

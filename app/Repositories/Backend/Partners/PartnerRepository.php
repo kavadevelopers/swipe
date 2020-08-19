@@ -35,19 +35,19 @@ class PartnerRepository extends BaseRepository
     public function getForDataTablePending()
     {
         return $this->query()
-            ->select('*')->with('bankDetail','adminDetail')->where('user_type', '=', 'washer')->where('verification_status',1)->where('payment_status',0);
+            ->select('*')->with('bankDetail','adminDetail')->where('user_type', '=', 'washer')->whereIn('verification_status',[1,2,3]);
         // return Partner::where('user_type', '=', 'user')->get();
     }
     public function getForDataTableConfirm()
     {
         return $this->query()
-            ->select('*')->with('bankDetail','adminDetail')->where('user_type', '=', 'washer')->where('verification_status',2);
+            ->select('*')->with('bankDetail','adminDetail')->where('user_type', '=', 'washer')->where('verification_status',23);
         // return Partner::where('user_type', '=', 'user')->get();
     }
     public function getForDataTableHistory()
     {
         return $this->query()
-            ->select('*')->with('bankDetail','adminDetail')->where('user_type', '=', 'washer')->where('status',1);
+            ->select('*')->with('bankDetail','adminDetail')->where('user_type', '=', 'user')->where('verification_status',4);
         // return Partner::where('user_type', '=', 'user')->get();
     }
 

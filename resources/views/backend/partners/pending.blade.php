@@ -28,7 +28,7 @@
                             <th>Email Address</th>
                             <th>Citizenship</th>
                             <th>Date of Birth (DOB)</th>
-                            <th>Bank Details</th>
+                            <th>Status</th>
                             <th>Activation code</th>
                             <th>Approved by</th>
                         </tr>
@@ -67,19 +67,20 @@
                     {data: 'email', name: '{{config('module.partners.table')}}.email'},
                     {data: 'citizenship', name: '{{config('module.partners.table')}}.citizenship'},
                     {data: 'dob', name: '{{config('module.partners.table')}}.dob'},
-                    {data: 'bank_detail', name: '{{config('module.partners.table')}}.email',
+                    {data: 'verification_status', name: '{{config('module.partners.table')}}.verification_status',
                         render: function ( data, type, row, meta ) {
-                            if(row.bank_detail){
-                                return row.bank_detail.bank_name+"<br>"+row.bank_detail.account_number;
+                            if(row.verification_status == "2"){
+                                return "Varification Pending";
+                            }else if(row.verification_status == "3"){
+                                return "Payment Pending";
                             }else{
-                                return "";
+                                return "Pending";
                             }
                         }
                     },
                     {data: 'activation_code', name: '{{config('module.partners.table')}}.activation_code'},
                     {data: 'admin_detail', name: '{{config('module.partners.table')}}.email',
                         render: function ( data, type, row, meta ) {
-                            console.log("row.admin_detail ==> ",row.admin_detail);
                             
                             if(row.admin_detail !== null){
                                 return row.admin_detail.first_name+" "+row.admin_detail.last_name;

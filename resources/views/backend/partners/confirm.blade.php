@@ -28,8 +28,7 @@
                             <th>Email Address</th>
                             <th>Citizenship</th>
                             <th>Date of Birth (DOB)</th>
-                            <th>Bank Details</th>
-                            <th>Reject / Approve</th>
+                            <th>Transaction Id</th>
                         </tr>
                     </thead>
                     
@@ -74,12 +73,6 @@
                             }else{
                                 return "";
                             }
-                        }
-                    },
-                    {data: 'actions', name: 'actions', searchable: false, sortable: false,
-                        render: function ( data, type, row, meta ) {
-                            var button = "<button type='button' id="+row.id+" data-set='Approve' class='washer-status'> Approve </button> <button type='button' id="+row.id+" data-set='Reject' class='washer-status'> Reject </button>";
-                            return button;
                         }
                     }
                 ],
