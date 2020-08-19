@@ -999,7 +999,7 @@ class UserController extends Controller
             else{
                 $profile = new Profile;
                 $profile->user_id = $user_id;
-                $profile->dob = $request->dob;
+                $profile->dob = date('Y-m-d',strtotime($request->dob));
                 $profile->save();
             }
 
