@@ -982,7 +982,7 @@ class UserController extends Controller
         $status = 400;
         $message = "Something Went Wrong!!!";
         $user_id = $request->user()->id;
-        User::where('id',$request->user()->id)->update(['user_type'=>'washer']);
+        User::where('id',$request->user()->id)->update(['user_type'=>'washer','verification_status' => 0]);
         $washer = WasherDetails::where('user_id', $user_id)->first();
         if ($washer){
             $status = 200;
