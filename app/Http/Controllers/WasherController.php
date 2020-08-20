@@ -85,8 +85,8 @@ class WasherController extends Controller
             $message = "No Wash available";
         }
         else{
-            Config::set('lat', $request->lat);
-            Config::set('lon', $request->lon);
+            // Config::set('lat', $request->lat);
+            // Config::set('lon', $request->lon);
             // $washes = CarWashBooking::where('status', 'Pending')->where('accepted_by', '0')->get();
             $washes = CarWashBooking::
             where(\DB::raw("STR_TO_DATE(`start_time`, '%a %b %d %H:%i:%s UTC+0000 %Y')"), '<', \DB::raw('NOW()'))->
@@ -100,7 +100,6 @@ class WasherController extends Controller
                 $response->request_wash = $washes;
                 $status = 200;
                 $message = "Result fetched successfully";
-
             }
         }
         $response->status = $status;
