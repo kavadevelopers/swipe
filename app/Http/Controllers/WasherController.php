@@ -89,7 +89,7 @@ class WasherController extends Controller
             Config::set('lon', $request->lon);
             // $washes = CarWashBooking::where('status', 'Pending')->where('accepted_by', '0')->get();
             $washes = CarWashBooking::
-            // where(\DB::raw("STR_TO_DATE(`start_time`, '%a %b %d %H:%i:%s UTC+0000 %Y')"), '<', \DB::raw('NOW()'))->
+            where(\DB::raw("STR_TO_DATE(`start_time`, '%a %b %d %H:%i:%s UTC+0000 %Y')"), '<', \DB::raw('NOW()'))->
             where('car_wash_bookings.status', 'Pending')->where('accepted_by', '0')->orderBy('updated_at','desc')->get()->where('status','Pending');
             // join('users', 'users.id', '=', 'car_wash_bookings.user_id')
             // ->join('my_cars','my_cars.id','car_wash_bookings.vehicle_id')
