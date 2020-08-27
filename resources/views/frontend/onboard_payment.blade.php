@@ -1,65 +1,96 @@
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-    var stripe = Stripe('{!!env("STRIPE_KEY")!!}');
-    var clientSecret = "{!! $paymentIntent !!}"
-
-    var elements = stripe.elements();
-        var style = {
-        base: {
-            color: "#32325d",
-        }
-    };
-
-    var card = elements.create("card", { style: style });
-</script>
-<form id="payment-form">
-    <div id="card-element">
-      <!-- Elements will create input elements here -->
-    </div>
-  
-    <!-- We'll put the error messages in this element -->
-    <div id="card-errors" role="alert"></div>
-  
-    <button id="submit">Pay</button>
-</form>
-<script>
-    card.mount("#card-element");
-    // cardElement.on('change', function(event) {
-    //     var displayError = document.getElementById('card-errors');
-    //     if (event.error) {
-    //         displayError.textContent = event.error.message;
-    //     } else {
-    //         displayError.textContent = '';
-    //     }
-    // });
-    var form = document.getElementById('payment-form');
-
-    form.addEventListener('submit', function(ev) {
-    ev.preventDefault();
-    stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-        card: card,
-        billing_details: {
-            name: '{!! $partner->name !!}'
-        }
-        }
-    }).then(function(result) {
-        if (result.error) {
-        // Show error to your customer (e.g., insufficient funds)
-        console.log(result.error.message);
-        } else {
-        // The payment has been processed!
-            console.log(result);
-        if (result.paymentIntent.status === 'succeeded') {
-            console.log(result);
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Swipe Join Member</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container" id="before"> 
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="jumbotron text-center">
+                        <h1>Pay to Continue</h1>
+                    </div>
+                </div>
+            </div>
             
-            // Show a success message to your customer
-            // There's a risk of the customer closing the window before callback
-            // execution. Set up a webhook or plugin to listen for the
-            // payment_intent.succeeded event that handles any business critical
-            // post-payment actions.
-        }
-        }
-    });
-    });
-</script>
+  
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button class="btn btn-success btn-block" onclick="pay(50)">Pay now</button>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+
+        <div class="container" id="after" style="display: none;">
+            <div class="row">
+                <div class="col-md-12"><pre id="token_response"></pre></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="jumbotron text-center">
+                        <h1>Payment Successfull Thankyou</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {  
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+            });
+  
+            function pay(amount) {
+                var handler = StripeCheckout.configure({
+                    key: '<?= env("STRIPE_SECRET") ?>', // your publisher key id
+                    locale: 'auto',
+                    token: function (token) {
+                        $('#before').hide();
+                        $('#after').show();
+                        // You can access the token ID with `token.id`.
+                        // Get the token ID to your server-side code for use.
+                        console.log('Token Created!!');
+                        console.log(token);
+                        $('#token_response').html(JSON.stringify(token));
+          
+                        $.ajax({
+                            url: '{{ route("stripe.post") }}',
+                            method: 'post',
+                            data: { tokenId: token.id, amount: amount ,uid:'<?= $uid ?>'},
+                            success: (response) => {
+                  
+                                console.log(response);
+                  
+                            },
+                            error: (error) => {
+                                console.log(error);
+                                alert('There is an error in processing.')
+                            }
+                        });
+                    }
+                });
+   
+                handler.open({
+                  name: 'Swipe',
+                  description: 'Pay To Continue',
+                  amount: amount * 1500
+                });
+            }
+        </script>
+</body>
+</html>

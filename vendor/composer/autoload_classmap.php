@@ -73,6 +73,7 @@ return array(
     'App\\Http\\Controllers\\ApiVehicleColor' => $baseDir . '/app/Http/Controllers/ApiVehicleColor.php',
     'App\\Http\\Controllers\\AppController' => $baseDir . '/app/Http/Controllers/AppController.php',
     'App\\Http\\Controllers\\AuthApiController' => $baseDir . '/app/Http/Controllers/AuthApiController.php',
+    'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
     'App\\Http\\Controllers\\Backend\\Access\\Permission\\PermissionController' => $baseDir . '/app/Http/Controllers/Backend/Access/Permission/PermissionController.php',
     'App\\Http\\Controllers\\Backend\\Access\\Permission\\PermissionTableController' => $baseDir . '/app/Http/Controllers/Backend/Access/Permission/PermissionTableController.php',
     'App\\Http\\Controllers\\Backend\\Access\\Role\\RoleController' => $baseDir . '/app/Http/Controllers/Backend/Access/Role/RoleController.php',

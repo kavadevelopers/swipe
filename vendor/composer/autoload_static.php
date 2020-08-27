@@ -916,6 +916,7 @@ class ComposerStaticInit08873ce39be69686fb283c3cce4f3d63
         'App\\Http\\Controllers\\ApiVehicleColor' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiVehicleColor.php',
         'App\\Http\\Controllers\\AppController' => __DIR__ . '/../..' . '/app/Http/Controllers/AppController.php',
         'App\\Http\\Controllers\\AuthApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthApiController.php',
+        'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Backend\\Access\\Permission\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/Access/Permission/PermissionController.php',
         'App\\Http\\Controllers\\Backend\\Access\\Permission\\PermissionTableController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/Access/Permission/PermissionTableController.php',
         'App\\Http\\Controllers\\Backend\\Access\\Role\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/Access/Role/RoleController.php',

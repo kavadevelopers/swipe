@@ -8,6 +8,8 @@
 // Switch between the included languages
 Route::get('lang/{lang}', 'LanguageController@swap');
 Route::get('payment/on_board/{uid}', 'Backend\Partners\PartnersController@onboardPay');
+Route::post('stripe-payment', 'Backend\Partners\PartnersController@payment')->name('stripe.post');
+Route::get('stripe-payment', 'Backend\Partners\PartnersController@payment_get');
 
 /* ----------------------------------------------------------------------- */
 

@@ -21,6 +21,7 @@ use Mail;
 use Stripe;
 use App\JoinFee;
 use App\logistics;
+use Validator;
 use Illuminate\Support\Facades\DB;
 
 
@@ -151,16 +152,16 @@ class PartnersController extends Controller
             try {
                 //code...
                 $profile = DB::table('profiles')->where('user_id', $input['id'])->first();
-                $payIntent = Stripe::paymentIntents()->
-                create([
-                    'amount' => 20,
-                    'currency' => 'INR',
-                    'description' => 'test description',
-                    'customer' => $profile->customer_key,
-                ]);
+                // $payIntent = Stripe::paymentIntents()->
+                // create([
+                //     'amount' => 20,
+                //     'currency' => 'INR',
+                //     'description' => 'test description',
+                //     'customer' => $profile->customer_key,
+                // ]);
                 $joinFee = [
                     'user_id' => $input['id'],
-                    'payment_intent' => $payIntent['id'],
+                    'payment_intent' => "",
                     'amount' => '20',
                     'currency' => 'INR',
                     'status' => 'pending',
@@ -213,6 +214,33 @@ class PartnersController extends Controller
         //     'paymentIntent' => $paymentIntent['client_secret']
         // ]);
 
+        
+        $partner = Partner::where('activation_code',$uid)->first();
+        if($partner){
+
+            return view('frontend.onboard_payment')->with('uid', $uid);
+
+        }else{
+
+
+            return abort(404);
+
+
+        }
+    }
+
+
+
+    public function payment(Request $request)
+    {
+        // $stripe = Stripe::charges()->create([
+        //     'source' => $request->get('tokenId'),
+        //     'currency' => 'USD',
+        //     'amount' => $request->get('amount') * 1500
+        // ]);
+  
+        // return $stripe;
+        $uid = $request->get('uid');
         $partner = Partner::where('activation_code',$uid)->first();
         if($partner->verification_status == 1){
             $sstatus = 2;
@@ -221,8 +249,11 @@ class PartnersController extends Controller
         }else{
             $sstatus = 23;
         }
-        $partner->update(['verification_status' => $sstatus]);
+        $partner->update(['verification_status' => $sstatus,'payment_token' => $request->get('tokenId'),'activation_code' => '']);
+    }
 
-        echo "Payment Done";
+    public function payment_get ()
+    {
+        return abort(404);        
     }
 }

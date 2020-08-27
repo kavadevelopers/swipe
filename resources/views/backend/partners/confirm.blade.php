@@ -66,15 +66,7 @@
                     {data: 'email', name: '{{config('module.partners.table')}}.email'},
                     {data: 'citizenship', name: '{{config('module.partners.table')}}.citizenship'},
                     {data: 'dob', name: '{{config('module.partners.table')}}.dob'},
-                    {data: 'bank_detail', name: '{{config('module.partners.table')}}.email',
-                        render: function ( data, type, row, meta ) {
-                            if(row.bank_detail){
-                                return row.bank_detail.bank_name+"<br>"+row.bank_detail.account_number;
-                            }else{
-                                return "";
-                            }
-                        }
-                    }
+                    {data: 'payment_token', name: '{{config('module.partners.table')}}.payment_token'},
                 ],
                 order: [[0, "asc"]],
                 searchDelay: 500,
