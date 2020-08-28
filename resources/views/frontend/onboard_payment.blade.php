@@ -64,9 +64,9 @@
                         $('#after').show();
                         // You can access the token ID with `token.id`.
                         // Get the token ID to your server-side code for use.
-                        console.log('Token Created!!');
-                        console.log(token);
-                        $('#token_response').html(JSON.stringify(token));
+                        // console.log('Token Created!!');
+                        // console.log(token);
+                        // $('#token_response').html(JSON.stringify(token));
           
                         $.ajax({
                             url: '{{ route("stripe.post") }}',
@@ -74,12 +74,12 @@
                             data: { tokenId: token.id, amount: amount ,uid:'<?= $uid ?>'},
                             success: (response) => {
                   
-                                console.log(response);
+                                //console.log(response);
                   
                             },
                             error: (error) => {
-                                console.log(error);
-                                alert('There is an error in processing.')
+                                // console.log(error);
+                                // alert('There is an error in processing.')
                             }
                         });
                     }
