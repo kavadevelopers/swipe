@@ -215,7 +215,7 @@ class PartnersController extends Controller
         // ]);
 
         
-        $partner = Partner::where('activation_code',$uid)->first();
+        $partner = Partner::where('activation_code',$uid)->where('payment_token','')->first();
         if($partner){
 
             return view('frontend.onboard_payment')->with('uid', $uid);
@@ -249,7 +249,7 @@ class PartnersController extends Controller
         }else{
             $sstatus = 23;
         }
-        $partner->update(['verification_status' => $sstatus,'payment_token' => $request->get('tokenId'),'activation_code' => '']);
+        $partner->update(['verification_status' => $sstatus,'payment_token' => $request->get('tokenId')]);
     }
 
     public function payment_get ()
