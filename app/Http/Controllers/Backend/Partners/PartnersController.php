@@ -249,7 +249,7 @@ class PartnersController extends Controller
         }else{
             $sstatus = 23;
         }
-        $partner->update(['verification_status' => $sstatus,'payment_token' => $request->get('tokenId'),'payment_status' => 'approve']);
+        $partner->update(['verification_status' => $sstatus,'payment_token' => $request->get('tokenId'),'payment_status' => '1']);
     }
 
     public function payment_get ()
