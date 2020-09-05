@@ -50,16 +50,13 @@ class WasherBankDetailController extends Controller
                 'account_number'            => $input['account_number'],
                 'account_holder'            => $input['account_holder']
             );
-            $user = User::where('id', $request->user()->id)->first();
-            $user->user_type = "washer";
-            $user->update(); 
         
             if($request->file('image')){
                 $image = $request->file('image');
-                $path = public_path().'image/'.$request->user()->id."/";
+                $path = public_path().'/image/'.$request->user()->id."/";
                 File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
                 $path = public_path();
-                $filename = public_path().'image/'.$request->user()->id."/".time() . '.' . $image->getClientOriginalExtension();
+                $filename = '/image/'.$request->user()->id."/".time() . '.' . $image->getClientOriginalExtension();
                 Image::make($image)->save(public_path($filename));
                 $detail['image'] =$filename;
             }
