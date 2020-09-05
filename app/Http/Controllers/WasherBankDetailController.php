@@ -56,7 +56,7 @@ class WasherBankDetailController extends Controller
         
             if($request->file('image')){
                 $image = $request->file('image');
-                $path = public_path().'/image/'.$request->user()->id."/";
+                $path = public_path().'image/'.$request->user()->id."/";
                 File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
                 $path = public_path();
                 $filename = public_path().'image/'.$request->user()->id."/".time() . '.' . $image->getClientOriginalExtension();
