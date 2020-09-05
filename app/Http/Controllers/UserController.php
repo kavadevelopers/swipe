@@ -291,6 +291,7 @@ class UserController extends Controller
                             ->first(); 
             $user = new StdClass;
             $user->name = $userdata->name;
+            $user->address = $userdata->address;
             $user->verification_status = $userdata->verification_status;
             $user->email = $userdata->email;
             $userProfileData = Profile::with('PrimaryCar','PrimaryCard')->where('user_id', $id)->first();
