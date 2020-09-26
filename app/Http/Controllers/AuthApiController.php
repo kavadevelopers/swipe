@@ -353,11 +353,17 @@ class AuthApiController extends Controller
             $message = "Your OTP is $randphone.Please use this otp to reset your password.";
             try {
                 //code...
-                Mail::to($id)->send(new PasswordResetOtp($message));
+                Mail::send(array(), array(), function ($message) use ($messagea,$id) {
+                  $message->to($id)
+                    ->subject("OTP Password reset")
+                    ->setBody($messagea, 'text/html');
+                });
+
                 $message = "Mail sent";
                 $status = 200;
-            } catch (\Throwable $th) {
+            } catch (\Exception $th) {
                 $message = "Something went wrong. Please try again after sometime";
+                //$message = $th->getMessage();
                 $status = 401;
                 //throw $th;
             }
