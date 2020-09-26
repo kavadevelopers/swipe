@@ -350,7 +350,7 @@ class AuthApiController extends Controller
             $randphone = mt_rand(10000, 99999);
             $user->remember_token = $randphone;
             $user->update(); 
-            $message = "Your OTP is $randphone.Please use this otp to reset your password.";
+            $messagea = "Your OTP is $randphone.Please use this otp to reset your password.";
             try {
                 //code...
                 Mail::send(array(), array(), function ($message) use ($messagea,$id) {
